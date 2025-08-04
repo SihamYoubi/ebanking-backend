@@ -9,9 +9,9 @@ import net.siham.ebankingbackend.enums.AccountStatus;
 import java.util.Date;
 import java.util.List;
 
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 //DiscriminatorType par defaut String la valeur max 255 charachters
-//@DiscriminatorColumn(name = "TYPE", length= 4)
+@DiscriminatorColumn(name = "TYPE", length= 4)
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor
 public class BankAccount {
@@ -24,6 +24,6 @@ public class BankAccount {
 
     @ManyToOne
     private Customer customer;
-    @OneToMany(mappedBy = "bankAccount", fetch= FetchType.EAGER)
+    @OneToMany(mappedBy = "bankAccount", fetch= FetchType.LAZY)
     private List<AccountOperation> accountOperations;
 }
